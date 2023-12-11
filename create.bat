@@ -35,25 +35,25 @@ pause
     dotnet new sln
     SET /P folderName="Introduce el nombre del proyecto WebApi: "
     dotnet new webapi -o !folderName!
-    dotnet add !folderName!\!folderName!.csproj package Microsoft.AspNetCore.Authentication.JwtBearer --version 7.0.10
-    dotnet add !folderName!\!folderName!.csproj package Microsoft.EntityFrameworkCore --version 7.0.10
-    dotnet add !folderName!\!folderName!.csproj package Microsoft.EntityFrameworkCore.Design --version 7.0.10
-    dotnet add !folderName!\!folderName!.csproj package Microsoft.Extensions.DependencyInjection --version 7.0.0
-    dotnet add !folderName!\!folderName!.csproj package System.IdentityModel.Tokens.Jwt --version 6.32.3
-    dotnet add !folderName!\!folderName!.csproj package Serilog.AspNetCore --version 7.0.0
+    dotnet add !folderName!\!folderName!.csproj package Microsoft.AspNetCore.Authentication.JwtBearer --version 8.0.0
+    dotnet add !folderName!\!folderName!.csproj package Microsoft.EntityFrameworkCore --version 8.0.0
+    dotnet add !folderName!\!folderName!.csproj package Microsoft.EntityFrameworkCore.Design --version 8.0.0
+    dotnet add !folderName!\!folderName!.csproj package Microsoft.Extensions.DependencyInjection --version 8.0.0
+    dotnet add !folderName!\!folderName!.csproj package System.IdentityModel.Tokens.Jwt --version 7.0.3
+    dotnet add !folderName!\!folderName!.csproj package Serilog.AspNetCore --version 8.0.0
     dotnet add !folderName!\!folderName!.csproj package AutoMapper.Extensions.Microsoft.DependencyInjection --version 12.0.1
     SET app=Application
     dotnet new classlib -o !app!
     SET persistencia=Persistence
     dotnet new classlib -o !persistencia!
     dotnet add !persistencia!\!persistencia!.csproj package Pomelo.EntityFrameworkCore.MySql --version 7.0.0
-    dotnet add !persistencia!\!persistencia!.csproj package Microsoft.EntityFrameworkCore --version 7.0.10
+    dotnet add !persistencia!\!persistencia!.csproj package Microsoft.EntityFrameworkCore --version 8.0.0
     dotnet add !persistencia!\!persistencia!.csproj package CsvHelper --version 30.0.1
     SET dom=Domain
     dotnet new classlib -o !dom!
     dotnet add !dom!\!dom!.csproj package FluentValidation.AspNetCore --version 11.3.0
-    dotnet add !dom!\!dom!.csproj package itext7.pdfhtml --version 5.0.1
-    dotnet add !dom!\!dom!.csproj package Microsoft.EntityFrameworkCore --version 7.0.10
+    dotnet add !dom!\!dom!.csproj package itext7.pdfhtml --version 5.0.2
+    dotnet add !dom!\!dom!.csproj package Microsoft.EntityFrameworkCore --version 8.0.0
     REM Agregando proyectos a la solucion
 	echo %DIR_EJECUCION%
 	pause
