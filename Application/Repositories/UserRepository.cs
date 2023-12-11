@@ -12,14 +12,13 @@ namespace Application.Repositories
     public class UserRepository : GenericRepository<User>, IUser
     {
         private readonly BiosegurityContext _context;
-        private string refreshToken;
 
         public UserRepository(BiosegurityContext context) : base(context)
         {
             _context = context;
         }
 
-        public async Task<User> GetByRefreshTokenAsync(string username)
+        public async Task<User> GetByRefreshTokenAsync(string refreshToken)
         {
             return await _context.Users
                     .Include(u => u.Rols)

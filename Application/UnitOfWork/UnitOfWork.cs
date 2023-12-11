@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Repositories;
+using Domain.Entities;
 using Domain.Interfaces;
 using Persistence.Data;
 
@@ -28,6 +29,9 @@ namespace Application.UnitOfWork
         private ProgrammingRepository _programmings;
         private ShiftRepository _shifts;
         private StateRepository _states;
+        private RolRepository _rols;
+        private RefreshTokenRepository _refreshTokens;
+        private UserRepository _users;
 
 
         public IAddressType AddressTypes
@@ -185,7 +189,39 @@ namespace Application.UnitOfWork
                 return _states;
             }
         }
-
+        public IRol Rols
+        {
+            get
+            {
+                if (_rols == null)
+                {
+                    _rols = new RolRepository(_context);
+                }
+                return _rols;
+            }
+        }
+        public IRefreshToken RefreshTokens
+        {
+            get
+            {
+                if (_refreshTokens == null)
+                {
+                    _refreshTokens = new RefreshTokenRepository(_context);
+                }
+                return _refreshTokens;
+            }
+        }
+        public IUser Users
+        {
+            get
+            {
+                if (_users == null)
+                {
+                    _users = new UserRepository(_context);
+                }
+                return _users;
+            }
+        }
         public void Dispose()
         {
             _context.Dispose();
