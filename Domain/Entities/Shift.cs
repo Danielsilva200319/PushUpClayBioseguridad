@@ -3,10 +3,8 @@ using System.Collections.Generic;
 
 namespace Domain.Entities;
 
-public partial class Shift
+public partial class Shift : BaseEntity
 {
-    public int Id { get; set; }
-
     public string ShiftName { get; set; } = null!;
 
     public TimeOnly TimeShiftStart { get; set; }

@@ -3,10 +3,8 @@ using System.Collections.Generic;
 
 namespace Domain.Entities;
 
-public partial class Personaddress
+public partial class Personaddress : BaseEntity
 {
-    public int Id { get; set; }
-
     public string Address { get; set; } = null!;
 
     public int IdPerson { get; set; }

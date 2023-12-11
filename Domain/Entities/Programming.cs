@@ -3,10 +3,8 @@ using System.Collections.Generic;
 
 namespace Domain.Entities;
 
-public partial class Programming
+public partial class Programming : BaseEntity
 {
-    public int Id { get; set; }
-
     public int IdContract { get; set; }
 
     public int IdShifts { get; set; }

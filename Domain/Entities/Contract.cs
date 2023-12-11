@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 
 namespace Domain.Entities;
-
-public partial class Contract
+ 
+public partial class Contract : BaseEntity
 {
-    public int Id { get; set; }
-
     public DateOnly DateContract { get; set; }
 
     public DateOnly DateEnd { get; set; }
