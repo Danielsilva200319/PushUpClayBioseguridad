@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Domain.Entities;
+using System.Reflection;
 
 namespace Persistence.Data;
 
 public partial class BiosegurityContext : DbContext
 {
-    public BiosegurityContext()
+/*     public BiosegurityContext()
     {
-    }
+    } */
 
     public BiosegurityContext(DbContextOptions<BiosegurityContext> options)
         : base(options)
@@ -50,11 +51,7 @@ public partial class BiosegurityContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder
-            .UseCollation("utf8mb4_0900_ai_ci")
-            .HasCharSet("utf8mb4");
-        OnModelCreatingPartial(modelBuilder);
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
     }
-
-    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
