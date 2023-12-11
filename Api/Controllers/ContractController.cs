@@ -42,20 +42,5 @@ namespace Api.Controllers
             }
             return _mapper.Map<ContractDto>(contracts);
         }
-        [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<ContractDto>> Post(ContractDto contractDto)
-        {
-            var contract = _mapper.Map<Contract>(contractDto);
-            _unitOfWork.ContactTypes.Add(contract);
-            await _unitOfWork.SaveAsync();
-            if (contract == null)
-            {
-                return BadRequest();
-            }
-            contractDto.Id = contract.Id;
-            return CreatedAtAction(nameof(Post), new {id = contractDto.Id}, contractDto);
-        }
     }
 }
