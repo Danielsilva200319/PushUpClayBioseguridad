@@ -21,6 +21,9 @@ namespace Domain.Interfaces
         IProgramming Programmings { get; }
         IShift Shifts { get; }
         IState States { get; }
+        IUser Users { get; }
+        IRol Rols { get; }
+        IRefreshToken RefreshToken { get; }
         Task<int> SaveAsync();
     }
 }

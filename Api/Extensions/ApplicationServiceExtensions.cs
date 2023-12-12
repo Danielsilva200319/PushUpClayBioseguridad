@@ -30,7 +30,7 @@ namespace Api.Extensions
         {
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
-        /* public static void AddJwt(this IServiceCollection services, IConfiguration configuration)
+        public static void AddJwt(this IServiceCollection services, IConfiguration configuration)
         {
             // Configuration from AppSettings
             services.Configure<JWT>(configuration.GetSection("JWT"));
@@ -57,7 +57,7 @@ namespace Api.Extensions
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Key"]))
                     };
                 });
-        } */
+        }
         public static void ConfigureRateLimiting(this IServiceCollection services)
         {
             services.AddMemoryCache();

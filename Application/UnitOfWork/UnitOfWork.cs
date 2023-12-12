@@ -212,7 +212,7 @@ namespace Application.UnitOfWork
                 return _rols;
             }
         }
-        public IRefreshToken RefreshTokens
+        public IRefreshToken RefreshToken
         {
             get
             {
@@ -234,6 +234,7 @@ namespace Application.UnitOfWork
                 return _users;
             }
         }
+
         public void Dispose()
         {
             _context.Dispose();
