@@ -10,12 +10,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
-    public class CountryController : ApiController
+    public class DepartmentController : ApiController
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public CountryController(IUnitOfWork unitOfWork, IMapper mapper)
+        public DepartmentController(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
@@ -23,72 +23,72 @@ namespace Api.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<IEnumerable<CountryDto>>> Get()
+        public async Task<ActionResult<IEnumerable<DepartmentDto>>> Get()
         {
-            var country = await _unitOfWork.Countries.GetAllAsync();
-            return _mapper.Map<List<CountryDto>>(country);
+            var department = await _unitOfWork.Departments.GetAllAsync();
+            return _mapper.Map<List<DepartmentDto>>(department);
         }
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<CountryDto>> Get(int id)
+        public async Task<ActionResult<DepartmentDto>> Get(int id)
         {
-            var countries = await _unitOfWork.Countries.GetByIdAsync(id);
-            if (countries == null)
+            var departments = await _unitOfWork.Departments.GetByIdAsync(id);
+            if (departments == null)
             {
                 return NotFound();
             }
-            return _mapper.Map<CountryDto>(countries);
+            return _mapper.Map<DepartmentDto>(departments);
         }
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-        public async Task<ActionResult<CountryDto>> Post(CountryDto countryDto)
+        public async Task<ActionResult<DepartmentDto>> Post(DepartmentDto departmentDto)
         {
-            var country = _mapper.Map<Country>(countryDto);
-            _unitOfWork.Countries.Add(country);
+            var department = _mapper.Map<Department>(departmentDto);
+            _unitOfWork.Departments.Add(department);
             await _unitOfWork.SaveAsync();
-            if (country == null)
+            if (department == null)
             {
                 return BadRequest();
             }
-            countryDto.Id = country.Id;
-            return CreatedAtAction(nameof(Post), new {id = countryDto.Id}, countryDto);
+            departmentDto.Id = department.Id;
+            return CreatedAtAction(nameof(Post), new {id = departmentDto.Id}, departmentDto);
         }
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
 
-        public async Task<ActionResult<CountryDto>> Put(int id, CountryDto countryDto)
+        public async Task<ActionResult<DepartmentDto>> Put(int id, DepartmentDto departmentDto)
         {
-            if (countryDto.Id == 0){
-                countryDto.Id = id;
+            if (departmentDto.Id == 0){
+                departmentDto.Id = id;
             }
-            if (countryDto.Id != id){
+            if (departmentDto.Id != id){
                 return BadRequest();
             }
-            if (countryDto == null){
+            if (departmentDto == null){
                 return NotFound();
             }
-            var countries = _mapper.Map<Country>(countryDto);
-            _unitOfWork.Countries.Update(countries);
+            var departments = _mapper.Map<Department>(departmentDto);
+            _unitOfWork.Departments.Update(departments);
             await _unitOfWork.SaveAsync();
-            return _mapper.Map<CountryDto>(countries);
+            return _mapper.Map<DepartmentDto>(departments);
         }
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Delete(int id)
         {
-            var country = await _unitOfWork.Countries.GetByIdAsync(id);
-            if (country == null)
+            var department = await _unitOfWork.Departments.GetByIdAsync(id);
+            if (department == null)
             {
                 return NotFound();
             }
-            _unitOfWork.Countries.Remove(country);
+            _unitOfWork.Departments.Remove(department);
             await _unitOfWork.SaveAsync();
             return NoContent();
         }

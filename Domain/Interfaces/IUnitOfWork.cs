@@ -11,6 +11,7 @@ namespace Domain.Interfaces
         ICity Cities { get; }
         IContactType ContactTypes { get; }
         IContract Contracts { get; }
+        ICountry Countries { get; }
         IDepartment Departments { get; }
         IPerson Persons { get; }
         IPersonAddress PersonAddresses { get; }

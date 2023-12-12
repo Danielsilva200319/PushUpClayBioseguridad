@@ -48,6 +48,16 @@ namespace Api.Controllers
         public async Task<ActionResult<ContractDto>> Post(ContractDto contractDto)
         {
             var contract = _mapper.Map<Contract>(contractDto);
+            if (contractDto.DateContract == DateOnly.MinValue)
+            {
+                contractDto.DateContract = DateOnly.FromDateTime(DateTime.Now);
+                contract.DateContract = DateOnly.FromDateTime(DateTime.Now);
+            }
+            if (contractDto.DateEnd == DateOnly.MinValue)
+            {
+                contractDto.DateEnd = DateOnly.FromDateTime(DateTime.Now);
+                contract.DateEnd = DateOnly.FromDateTime(DateTime.Now);
+            }
             _unitOfWork.Contracts.Add(contract);
             await _unitOfWork.SaveAsync();
             if (contract == null)
@@ -74,6 +84,16 @@ namespace Api.Controllers
                 return NotFound();
             }
             var contracts = _mapper.Map<Contract>(contractDto);
+            if (contractDto.DateContract == DateOnly.MinValue)
+            {
+                contractDto.DateContract = DateOnly.FromDateTime(DateTime.Now);
+                contracts.DateContract = DateOnly.FromDateTime(DateTime.Now);
+            }
+            if (contractDto.DateEnd == DateOnly.MinValue)
+            {
+                contractDto.DateEnd = DateOnly.FromDateTime(DateTime.Now);
+                contracts.DateEnd = DateOnly.FromDateTime(DateTime.Now);
+            }
             _unitOfWork.Contracts.Update(contracts);
             await _unitOfWork.SaveAsync();
             return _mapper.Map<ContractDto>(contracts);

@@ -10,12 +10,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
-    public class CountryController : ApiController
+    public class PersonContactController : ApiController
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public CountryController(IUnitOfWork unitOfWork, IMapper mapper)
+        public PersonContactController(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
@@ -23,72 +23,72 @@ namespace Api.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<IEnumerable<CountryDto>>> Get()
+        public async Task<ActionResult<IEnumerable<PersonContactDto>>> Get()
         {
-            var country = await _unitOfWork.Countries.GetAllAsync();
-            return _mapper.Map<List<CountryDto>>(country);
+            var personContact = await _unitOfWork.PersonContacts.GetAllAsync();
+            return _mapper.Map<List<PersonContactDto>>(personContact);
         }
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<CountryDto>> Get(int id)
+        public async Task<ActionResult<PersonContactDto>> Get(int id)
         {
-            var countries = await _unitOfWork.Countries.GetByIdAsync(id);
-            if (countries == null)
+            var personContacts = await _unitOfWork.PersonContacts.GetByIdAsync(id);
+            if (personContacts == null)
             {
                 return NotFound();
             }
-            return _mapper.Map<CountryDto>(countries);
+            return _mapper.Map<PersonContactDto>(personContacts);
         }
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-        public async Task<ActionResult<CountryDto>> Post(CountryDto countryDto)
+        public async Task<ActionResult<PersonContactDto>> Post(PersonContactDto personContactDto)
         {
-            var country = _mapper.Map<Country>(countryDto);
-            _unitOfWork.Countries.Add(country);
+            var personContact = _mapper.Map<Personcontact>(personContactDto);
+            _unitOfWork.PersonContacts.Add(personContact);
             await _unitOfWork.SaveAsync();
-            if (country == null)
+            if (personContact == null)
             {
                 return BadRequest();
             }
-            countryDto.Id = country.Id;
-            return CreatedAtAction(nameof(Post), new {id = countryDto.Id}, countryDto);
+            personContactDto.Id = personContact.Id;
+            return CreatedAtAction(nameof(Post), new {id = personContactDto.Id}, personContactDto);
         }
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
 
-        public async Task<ActionResult<CountryDto>> Put(int id, CountryDto countryDto)
+        public async Task<ActionResult<PersonContactDto>> Put(int id, PersonContactDto personContactDto)
         {
-            if (countryDto.Id == 0){
-                countryDto.Id = id;
+            if (personContactDto.Id == 0){
+                personContactDto.Id = id;
             }
-            if (countryDto.Id != id){
+            if (personContactDto.Id != id){
                 return BadRequest();
             }
-            if (countryDto == null){
+            if (personContactDto == null){
                 return NotFound();
             }
-            var countries = _mapper.Map<Country>(countryDto);
-            _unitOfWork.Countries.Update(countries);
+            var personContacts = _mapper.Map<Personcontact>(personContactDto);
+            _unitOfWork.PersonContacts.Update(personContacts);
             await _unitOfWork.SaveAsync();
-            return _mapper.Map<CountryDto>(countries);
+            return _mapper.Map<PersonContactDto>(personContacts);
         }
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Delete(int id)
         {
-            var country = await _unitOfWork.Countries.GetByIdAsync(id);
-            if (country == null)
+            var personContact = await _unitOfWork.PersonContacts.GetByIdAsync(id);
+            if (personContact == null)
             {
                 return NotFound();
             }
-            _unitOfWork.Countries.Remove(country);
+            _unitOfWork.PersonContacts.Remove(personContact);
             await _unitOfWork.SaveAsync();
             return NoContent();
         }
