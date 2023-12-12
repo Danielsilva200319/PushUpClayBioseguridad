@@ -5,6 +5,18 @@ CREATE TABLE `Country`(
     `Id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `Name` VARCHAR(50) NOT NULL
 );
+INSERT INTO `Country` (`Name`) VALUES
+('United States'),
+('Canada'),
+('United Kingdom'),
+('Germany'),
+('France'),
+('Australia'),
+('Brazil'),
+('Japan'),
+('South Africa'),
+('India');
+
 
 CREATE TABLE `Department`(
     `Id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -12,6 +24,36 @@ CREATE TABLE `Department`(
     `IdCountry` INT NOT NULL,
     CONSTRAINT `department_idcountry_foreign` FOREIGN KEY(`IdCountry`) REFERENCES `Country`(`Id`)
 );
+INSERT INTO `Department` (`Name`, `IdCountry`) VALUES
+('New York', 1),                    -- New York state in the United States (assuming 1 is the Id for the United States)
+('Ontario', 2),                     -- Ontario state in Canada
+('London', 3),                      -- London state in the United Kingdom
+('Bavaria', 4),                     -- Bavaria state in Germany
+('Île-de-France', 5),               -- Île-de-France state in France
+('California', 1),                  -- California state in the United States
+('Texas', 1),                       -- Texas state in the United States
+('Quebec', 2),                      -- Quebec state in Canada
+('Alberta', 2),                     -- Alberta state in Canada
+('Scotland', 3),                    -- Scotland state in the United Kingdom
+('Wales', 3),                       -- Wales state in the United Kingdom
+('Bavaria', 4),                     -- Bavaria state in Germany
+('Hesse', 4),                       -- Hesse state in Germany
+('Provence-Alpes-Côte d''Azur', 5), -- Île-de-France state in France
+('New South Wales', 6),           -- New South Wales state in Australia
+('São Paulo', 7),                 -- São Paulo state in Brazil
+('Tokyo', 8),                     -- Tokyo state in Japan
+('Gauteng', 9),                   -- Gauteng state in South Africa
+('Maharashtra', 10), 
+('Queensland', 6),                -- Queensland state in Australia
+('Victoria', 6),                  -- Victoria state in Australia
+('Rio de Janeiro', 7),            -- Rio de Janeiro state in Brazil
+('Minas Gerais', 7),              -- Minas Gerais state in Brazil
+('Osaka', 8),                     -- Osaka state in Japan
+('Hokkaido', 8),                  -- Hokkaido state in Japan
+('Western Cape', 9),              -- Western Cape state in South Africa
+('KwaZulu-Natal', 9),             -- KwaZulu-Natal state in South Africa
+('Maharashtra', 10),              -- Maharashtra state in India
+('Tamil Nadu', 10); 
 
 CREATE TABLE `City`(
     `Id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
