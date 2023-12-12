@@ -1,19 +1,19 @@
 using System.Reflection;
 using Api.Extensions;
 using AspNetCoreRateLimit;
-/* using GardenApi.Helpers.Error; */
+using Microsoft.AspNetCore.Authentication.BearerToken; //👈
+using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Data;
 using Serilog;
+using Domain.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
-/* var logger = new LoggerConfiguration()
-					.ReadFrom.Configuration(builder.Configuration)
-					.Enrich.FromLogContext()
-					.CreateLogger();
+builder.Services
+                .AddAuthentication()
+                .AddBearerToken(); //👈
+builder.Services.AddAuthorization();
 
-builder.Logging.ClearProviders();
-builder.Logging.AddSerilog(logger); */
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -32,6 +32,23 @@ builder.Services.AddDbContext<BiosegurityContext>(options =>
 });
 
 var app = builder.Build();
+app.MapGet("/login", (string username) =>
+{
+    var claimsPrincipal = new ClaimsPrincipal
+    (
+        new ClaimsIdentity
+        (
+            new[] { new Claim(ClaimTypes.Name, username)},
+            BearerTokenDefaults.AuthenticationScheme //👈
+        )
+    );
+    return Results.SignIn(claimsPrincipal);
+});
+app.MapGet("/user", (ClaimsPrincipal user) => 
+{
+    return Results.Ok($"Welcome {user.Identity.Name}!");
+})
+.RequireAuthorization();
 /* app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseStatusCodePagesWithReExecute("/errors/{0}"); */
@@ -56,6 +73,7 @@ using (var scope = app.Services.CreateScope())
         _logger.LogError(ex, "Ocurrio un error durante la migracion");
     }
 }
+
 app.UseCors("CorsPolicy");
 
 app.UseHttpsRedirection();
