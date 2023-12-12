@@ -25,7 +25,7 @@ namespace Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<IEnumerable<CityDto>>> Get()
         {
-            var city = await _unitOfWork.AddressTypes.GetAllAsync();
+            var city = await _unitOfWork.Cities.GetAllAsync();
             return _mapper.Map<List<CityDto>>(city);
         }
         [HttpGet("{id}")]

@@ -20,6 +20,7 @@ namespace Application.UnitOfWork
         private CityRepository _cities;
         private ContactTypeRepository _contacttypes;
         private ContractRepository _contracts;
+        private CountryRepository _countries;
         private DepartmentRepository _departments;
         private PersonRepository _persons;
         private PersonAddressRepository _personAddresses;
@@ -32,7 +33,6 @@ namespace Application.UnitOfWork
         private RolRepository _rols;
         private RefreshTokenRepository _refreshTokens;
         private UserRepository _users;
-
 
         public IAddressType AddressTypes
         {
@@ -79,6 +79,18 @@ namespace Application.UnitOfWork
                     _contracts = new ContractRepository(_context);
                 }
                 return _contracts;
+            }
+        }
+
+        public ICountry Countries
+        {
+            get
+            {
+                if (_countries == null)
+                {
+                    _countries = new CountryRepository(_context);
+                }
+                return _countries;
             }
         }
 

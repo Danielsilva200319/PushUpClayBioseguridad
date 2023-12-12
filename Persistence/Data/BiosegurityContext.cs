@@ -8,9 +8,9 @@ namespace Persistence.Data;
 
 public partial class BiosegurityContext : DbContext
 {
-/*     public BiosegurityContext()
+    public BiosegurityContext()
     {
-    } */
+    }
 
     public BiosegurityContext(DbContextOptions<BiosegurityContext> options)
         : base(options)
