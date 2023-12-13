@@ -6,16 +6,16 @@ CREATE TABLE `Country`(
     `Name` VARCHAR(50) NOT NULL
 );
 INSERT INTO `Country` (`Name`) VALUES
-('United States'),
-('Canada'),
-('United Kingdom'),
-('Germany'),
-('France'),
-('Australia'),
-('Brazil'),
-('Japan'),
-('South Africa'),
-('India');
+('United States'),      -- America
+('Canada'),             -- America
+('United Kingdom'),     -- Europa
+('Germany'),            -- Europa
+('France'),             -- Europa
+('Australia'),          -- Oceania
+('Brazil'),             -- America
+('Japan'),              -- Asia
+('South Africa'),       -- Africa
+('India');              -- Asia
 
 
 CREATE TABLE `Department`(
@@ -43,7 +43,7 @@ INSERT INTO `Department` (`Name`, `IdCountry`) VALUES
 ('São Paulo', 7),                 -- São Paulo state in Brazil
 ('Tokyo', 8),                     -- Tokyo state in Japan
 ('Gauteng', 9),                   -- Gauteng state in South Africa
-('Maharashtra', 10), 
+('Maharashtra', 10),              -- 
 ('Queensland', 6),                -- Queensland state in Australia
 ('Victoria', 6),                  -- Victoria state in Australia
 ('Rio de Janeiro', 7),            -- Rio de Janeiro state in Brazil
@@ -53,7 +53,7 @@ INSERT INTO `Department` (`Name`, `IdCountry`) VALUES
 ('Western Cape', 9),              -- Western Cape state in South Africa
 ('KwaZulu-Natal', 9),             -- KwaZulu-Natal state in South Africa
 ('Maharashtra', 10),              -- Maharashtra state in India
-('Tamil Nadu', 10); 
+('Tamil Nadu', 10);               -- Tamil Nadu state in India
 
 CREATE TABLE `City`(
     `Id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
